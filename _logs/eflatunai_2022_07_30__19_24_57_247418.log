@@ -1,0 +1,6 @@
+2022-07-30 19:24:58,798 - INFO - YOLOv5  2022-7-30 Python-3.10.5 torch-1.11.0+cu113 CUDA:0 (NVIDIA GeForce RTX 3070, 8192MiB)
+
+2022-07-30 19:24:59,983 - INFO - Fusing layers... 
+2022-07-30 19:25:00,953 - INFO - Model summary: 444 layers, 86247433 parameters, 0 gradients
+2022-07-30 19:25:00,956 - INFO - Adding AutoShape... 
+2022-07-30 19:25:02,395 - INFO - Login Successfully Completed : {'username': 'eflatunai', 'password': 'BAxvYIeZ'}

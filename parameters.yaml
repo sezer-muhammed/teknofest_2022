@@ -1,0 +1,55 @@
+teknofest:
+  number_cls: 11 
+  names_cls: ["car", #0
+              "kam", #1
+              "ismak", #2
+              "mot", #3
+              "bus", #4
+              "tren", #5
+              "ins", #6
+              "uyam", "yaam", #7-8 
+              "uuap", "yuap"] #9-10
+  colors_cls: [[204, 204, 255], 
+               [153, 153, 255], 
+               [102, 102, 255], 
+               [51, 51, 255],
+               [0, 0, 255], 
+               [0, 0, 204], 
+               [0, 204, 102], 
+               [255, 204, 255], [153, 0, 153], 
+               [153, 255, 51], [0, 102, 51]]
+
+#Parameters for IOU calculation
+iou:
+  correct_thres: 0.6
+  correct_point_multiplier: 3
+  wrong_multiplier: -1
+
+input:
+  extension: tekno
+  video_source: ornek_video/DJI_0113.MP4
+
+preprocess:
+  normalization: False #TODO Will be tested
+  clahe_ratio: 0.5
+
+#Parameters for model zoo
+yolov5:
+  weights: ep97-800-3007.pt
+  iou_thres: 0.3
+  img_size: 800
+
+#Model Type: raw, sahi | PLACEHOLDER | Sahi Slice Ratio | Classes | Raw Input Bool
+performance_flows: ["flow_one"]
+conf_mat: [0.42, 0.44, 0.5, 0.5, 0.5, 0.5, 0.66, 0.5, 0.5, 0.5, 0.5]
+
+work_flow: 
+  flow_calibrator: [["raw", 0, 0, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2], 
+                    ["sahi", 0, 0.55, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0],
+                    ["sahi", 0, 1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0],
+                    ["sahi", 0, 1.5, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0],
+                    ["sahi", 0, 1, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1],
+                    ["sahi", 0, 1.5, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1],
+                    ]
+  flow_one: [["raw", 0.01, 1, [4, 1, 2, 3, 0, 5, 6, 7, 8, 9, 10], True]]
+  flow_three: [["sahi", 1, 0.55, [6], False], ["raw", 1, 1, [4, 0, 2, 1, 3, 5, 7, 8, 9, 10], True]]
